@@ -29,10 +29,20 @@ life_exp_url = "https://ourworldindata.org/grapher/life-expectancy.csv"
 df_taxis = pd.read_csv(taxis_url)
 display(df_taxis.head())
 
-## Cleaning decisions
-- التكرار: (اتمسى/لا — وليه)
-- النواقص: (dropna أو fillna — وليه)
-- أنواع غلط / outliers: ...
+## Cleaning decisionsraw = pd.DataFrame([
+{"category": "food",  "amount": 85.5},
+{"category": None,    
+"amount": 40.0},
+{"category": "food",  "amount": 85.5},
+{"category": "drink", "amount": "n/a"},
+])
+print(raw.isna().sum().sum())              
+clean = raw.drop_duplicates().dropna()
+print(len(clean))                          
+# 2
+# 1
+clean["amount"] = clean["amount"].astype(float)
+print(clean["amount"].sum())  
 
 ## Finding 1
 - الجملة: ...
